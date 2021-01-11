@@ -123,7 +123,7 @@ local editor            = os.getenv("EDITOR") or "nano"
 local editorgui         = "code"
 local filemanager       = "thunar"
 local mailclient        = "evolution"
-local mediaplayer       = "mpd"
+local mediaplayer       = "vlc"
 local terminal          = "urxvt"
 local virtualmachine    = "virtualbox"
 
@@ -349,10 +349,14 @@ globalkeys = my_table.join(
     -- super + ...
     awful.key({ modkey }, "c", function () awful.util.spawn( "code" ) end,
         {description = "vs code", group = "super"}),
-    awful.key({ modkey }, "e", function () awful.util.spawn( editorgui ) end,
-        {description = "run gui editor", group = "super"}),
-    --awful.key({ modkey }, "h", function () awful.util.spawn( "urxvt -T 'htop task manager' -e htop" ) end,
-        --{description = "htop", group = "super"}),
+    awful.key({ modkey }, "e", function () awful.util.spawn( "chromium --app=http://yoursports.stream/live?v=espn" ) end,
+        {description = "ESPN", group = "super"}),
+    awful.key({ modkey }, "n", function () awful.util.spawn( "chromium --app=https://www.netflix.com/browse" ) end,
+        {description = "Netflix", group = "super"}),
+    --awful.key({ modkey }, "e", function () awful.util.spawn( editorgui ) end,
+        --{description = "run gui editor", group = "super"}),
+    awful.key({ modkey }, "h", function () awful.util.spawn( "urxvt -T 'htop task manager' -e htop" ) end,
+        {description = "htop", group = "super"}),
     awful.key({ modkey }, "r", function () awful.util.spawn( "rofi-theme-selector" ) end,
         {description = "rofi theme selector", group = "super"}),
     --awful.key({ modkey }, "t", function () awful.util.spawn( terminal ) end,
@@ -956,22 +960,22 @@ awful.rules.rules = {
          --  properties = { tag = awful.util.tagnames[2], switchtotag = true  } },
 
     -- Set applications to always map on the tag 3 on any screen.
-    --{ rule = { class = "kodi" },
-        --properties = { tag = awful.util.tagnames[3],  switchtotag = true  } },
+    { rule = { class = "kodi" },
+        properties = { tag = awful.util.tagnames[3],  switchtotag = true  } },
 
     --{ rule = { class = "plexmediaplayer" },
         --properties = { tag = awful.util.tagnames[3], switchtotag = true } },
 
     -- Set applications to always map on the tag 4 on any screen.
-    --{ rule = { class = "plexmediaplayer" },
-        --properties = { tag = awful.util.tagnames[4], requests_no_titlebar, switchtotag = true } },
+    { rule = { class = "plexmediaplayer" },
+        properties = { tag = awful.util.tagnames[4], requests_no_titlebar, switchtotag = true } },
 
     --{ rule = { class = "stremio" },
         --properties = { tag = awful.util.tagnames[4], switchtotag = true  } },
 
     -- Set applications to always map on the tag 5 on any screen.
-    --{ rule = { class = "stremio" },
-        --properties = { tag = awful.util.tagnames[5], switchtotag = true  } },
+    { rule = { class = "stremio" },
+        properties = { tag = awful.util.tagnames[5], switchtotag = true  } },
     --{ rule = { class = "retroarch" },
         --properties = { tag = awful.util.tagnames[5] , switchtotag = true  } },
 
@@ -1269,9 +1273,9 @@ awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("pamac-tray")
 awful.spawn.with_shell("blueberry-tray")
 awful.spawn.with_shell("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-awful.spawn.with_shell("numlockx on")
+--awful.spawn.with_shell("numlockx on")
 awful.spawn.with_shell("conky -c $HOME/.config/awesome/system-overview")
-awful.spawn.with_shell("feh --bg-fill $HOME/.config/awesome/themes/copland/starwarsblue.jpg &")
+--awful.spawn.with_shell("feh --bg-fill $HOME/.config/awesome/themes/copland/starwarsblue.jpg &")
 --awful.spawn.with_shell("xfce4-power-manager")
 --awful.spawn.with_shell("nitrogen --restore")
 --awful.spawn.with_shell("")
@@ -1283,6 +1287,6 @@ awful.spawn.with_shell("feh --bg-fill $HOME/.config/awesome/themes/copland/starw
 --awful.spawn("stremio")
 --awful.spawn("plexmediaplayer")
 --awful.spawn("retroarch")
---awful.spawn("chromium --app=https://www.netflix.com/browse")
+--awful.spawn("chromium --app=http://yoursports.stream/live?v=espn")
 --awful.spawn("mpv")
 --awful.spawn("")
