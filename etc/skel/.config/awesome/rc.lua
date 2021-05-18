@@ -9,6 +9,8 @@
 
      lain : https://github.com/lcpz/lain
 
+     use xprop to get window title and class
+
 --]]
 
 -- {{{ Required libraries
@@ -323,28 +325,30 @@ globalkeys = my_table.join(
     -- super + ... function keys
     awful.key({ modkey }, "F1", function () awful.util.spawn( "kodi" ) end,
         {description = "kodi" ,group = "function keys" }),
-    awful.key({ modkey }, "F2", function () awful.util.spawn( "google-chrome-stable --app=https://www.netflix.com/browse" ) end,
-        {description = "Netflix", group = "function keys"}),
-    awful.key({ modkey }, "F3", function () awful.util.spawn( "plexmediaplayer" ) end,
+    awful.key({ modkey }, "F2", function () awful.util.spawn( "plexmediaplayer" ) end,
         {description = "plex" , group = "function keys" }),
+    awful.key({ modkey }, "F3", function () awful.util.spawn( "steam" ) end,
+        {description = "steam" , group = "function keys" }),
     awful.key({ modkey }, "F4", function () awful.util.spawn( "xfce4-appfinder" ) end,
         {description = "app launcher" , group = "function keys" }),
     awful.key({ modkey }, "F5", function () awful.util.spawn( "pamac-manager %U" ) end,
         {description = "app store" , group = "function keys" }),
-    awful.key({ modkey }, "F6", function () awful.util.spawn( "xfce4-settings-manager" ) end,
-        {description = "system settings" , group = "function keys" }),
-    awful.key({ modkey }, "F7", function () awful.util.spawn( "virtualbox" ) end,
-        {description = virtualmachine , group = "function keys" }),
+    awful.key({ modkey }, "F6", function () awful.util.spawn( "vlc --video-on-top" ) end,
+        {description = "vlc" , group = "function keys" }),
+    awful.key({ modkey }, "F7", function () awful.util.spawn( "simplescreenrecorder" ) end,
+        {description = "simplescreenrecorder" , group = "function keys" }),
     awful.key({ modkey }, "F8", function () awful.util.spawn( "conky-toggle" ) end,
         {description = "conky-toggle" , group = "function keys" }),
-    awful.key({ modkey }, "F9", function () awful.util.spawn( "vlc --video-on-top" ) end,
-        {description = "vlc" , group = "function keys" }),
-    awful.key({ modkey }, "F10", function () awful.util.spawn( "retroarch" ) end,
-        {description = "retroarch" , group = "function keys" }),
-    awful.key({ modkey }, "F11", function () awful.util.spawn( "xfce4-taskmanager" ) end,
+    awful.key({ modkey }, "F9", function () awful.util.spawn( "virtualbox" ) end,
+        {description = virtualmachine , group = "function keys" }),
+    awful.key({ modkey }, "F10", function () awful.util.spawn( "xfce4-appearance-settings" ) end,
+        {description = "appearance settings" , group = "function keys" }),
+    awful.key({ modkey }, "F11", function () awful.util.spawn( "xfce4-settings-manager" ) end,
+        {description = "system settings" , group = "function keys" }),
+    awful.key({ modkey }, "F12", function () awful.util.spawn( "xfce4-taskmanager" ) end,
         {description = "task manager" , group = "function keys" }),
-    awful.key({ modkey }, "F12", function () awful.util.spawn( "rofi -show run" ) end,
-        {description = "rofi" , group = "function keys" }),
+    -- awful.key({ modkey }, "F12", function () awful.util.spawn( "rofi -show run" ) end,
+        -- {description = "rofi" , group = "function keys" }),
 
     -- super + ...
     awful.key({ modkey }, "c", function () awful.util.spawn( "code" ) end,
@@ -353,12 +357,14 @@ globalkeys = my_table.join(
         {description = "ESPN", group = "super"}),
     awful.key({ modkey }, "n", function () awful.util.spawn( "google-chrome-stable --app=https://www.netflix.com/browse" ) end,
         {description = "Netflix", group = "super"}),
+    awful.key({ modkey }, "y", function () awful.util.spawn( "google-chrome-stable --app=https://www.youtube.com/feed/subscriptions" ) end,
+        {description = "YouTube", group = "super"}), 
     --awful.key({ modkey }, "e", function () awful.util.spawn( editorgui ) end,
         --{description = "run gui editor", group = "super"}),
     awful.key({ modkey }, "h", function () awful.util.spawn( "urxvt -T 'htop task manager' -e htop" ) end,
         {description = "htop", group = "super"}),
-    awful.key({ modkey }, "r", function () awful.util.spawn( "rofi-theme-selector" ) end,
-        {description = "rofi theme selector", group = "super"}),
+    -- awful.key({ modkey }, "r", function () awful.util.spawn( "rofi-theme-selector" ) end,
+        -- {description = "rofi theme selector", group = "super"}),
     --awful.key({ modkey }, "t", function () awful.util.spawn( terminal ) end,
         --{description = "terminal", group = "super"}),
     awful.key({ modkey }, "v", function () awful.util.spawn( "pavucontrol" ) end,
@@ -800,7 +806,7 @@ clientkeys = my_table.join(
               {description = "close", group = "hotkeys"}),
     awful.key({ modkey, },           "q",      function (c) c:kill()                         end,
               {description = "close", group = "hotkeys"}),
-    awful.key({ modkey, "Shift" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Shift" }, "f",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
@@ -923,7 +929,7 @@ awful.rules.rules = {
     },
 
     -- Titlebars
-    { rule_any = { type = { "dialog", "normal" } },
+    { rule_any = { type = { "dialog", "normal" } },         --tittlebars set to off, toggle with modkey+t
       properties = { titlebars_enabled = false  } },
 
     { rule = { class = "Thunar" },
@@ -1167,8 +1173,8 @@ awful.rules.rules = {
           "Wpa_gui",
           "pinentry",
           "veromix",
-          "xtightvncviewer",
-          "Xfce4-terminal"},
+          --"Xfce4-terminal"    --comment to make vim non floating
+          "xtightvncviewer",},
 
         name = {
           "Event Tester",  -- xev.
