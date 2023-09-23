@@ -144,18 +144,17 @@ awful.util.tagnames = {  "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑",
 --awful.util.tagnames = { "", "", "", "", "" }
 awful.layout.suit.tile.left.mirror = true
 awful.layout.layouts = {
-    awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.fair,
+	awful.layout.suit.spiral.dwindle,
     awful.layout.suit.tile,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.floating,
+    awful.layout.suit.fair,
+    --awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.floating,
     --awful.layout.suit.max.fullscreen,
     --awful.layout.suit.max,
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
     --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.magnifier,
     --awful.layout.suit.corner.nw,
     --awful.layout.suit.corner.ne,
@@ -426,8 +425,8 @@ globalkeys = my_table.join(
     awful.key({ modkey1, "Shift"  }, "k", function () awful.util.spawn( "kdenlive" ) end,
         {description = "kdenlive" , group = "super" }),
     awful.key({ modkey1, "Shift"   }, "m", function() awful.util.spawn( "mousepad" ) end),
-    awful.key({ modkey1, "Shift"  }, "p", function () awful.util.spawn( "peek" ) end,
-        {description = "peek" , group = "super" }),
+    -- awful.key({ modkey1, "Shift"  }, "p", function () awful.util.spawn( "peek" ) end,
+    --     {description = "peek" , group = "super" }),
     awful.key({ modkey1, "Shift"  }, "r", function () awful.util.spawn( "simplescreenrecorder" ) end,
         {description = "simplescreenrecorder" , group = "super" }),
 
@@ -736,7 +735,7 @@ globalkeys = my_table.join(
     --           {description = "-10%", group = "hotkeys"}),
     awful.key({ }, "XF86MonBrightnessUp", function () os.execute("brightnessctl set +10%") end,
               {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("brightnessctl set 10%-") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
               {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
@@ -1217,6 +1216,9 @@ awful.rules.rules = {
 
     { rule = { class = "Xfce4-settings-manager" },
           properties = { floating = false } },
+          
+    { rule = { class = "Matplotlib" },
+          properties = { floating = true, titlebars_enabled = true } },
 
     -- Floating clients.
     { rule_any = {
@@ -1349,6 +1351,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.spawn.with_shell("~/.screenlayout/*.sh")     -- save only one layout with arandr inside ~/.screenlayout/ 
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 awful.spawn.with_shell("picom -b --config  $HOME/.config/awesome/picom.conf")
+awful.spawn("xrdb -merge ~/.Xresources")
 -- awful.spawn.with_shell("nm-applet")
 -- awful.spawn.with_shell("pamac-tray")
 -- awful.spawn.with_shell("blueberry-tray")
@@ -1359,7 +1362,6 @@ awful.spawn.with_shell("picom -b --config  $HOME/.config/awesome/picom.conf")
 -- awful.spawn.with_shell("xfce4-clipman")
 -- awful.spawn.with_shell("xfce4-battery-plugin")
 --awful.spawn.with_shell("nitrogen --restore")
-awful.spawn.with_shell("xrdb -merge ~/.Xresources")
 
 -- uncomment the below awful.spawns 
 -- and add application you wish to spawn in ""
